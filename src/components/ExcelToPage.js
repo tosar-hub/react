@@ -6,6 +6,7 @@ import '../styles/ExcelToPage.css'
 function ExcelToPage() {
     const [columns, setColumns] = useState(null);
     const [file, setFile] = useState('');
+
     const onChange = async (e) => {
         const file = e.target.files[0];
         const goodName = ['xls', 'xlsx']
