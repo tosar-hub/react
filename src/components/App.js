@@ -15,6 +15,7 @@ function App() {
             if (!goodName) throw new Error('The excel file could not be found !!!')
         }
 
+
         try {
             const file = e.target.files[0]
             checkFile(file)
