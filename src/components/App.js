@@ -9,13 +9,15 @@ function App() {
     const onChange = async (e) => {
         setColumns(null)
         setError(null)
+
+        function checkFile(nam) {
+            const goodName = ['xls', 'xlsx'].includes(nam.name.split(".")[1])
+            if (!goodName) throw new Error('The excel file could not be found !!!')
+        }
+
         try {
             const file = e.target.files[0]
-            const goodName = ['xls', 'xlsx'].includes(file.name.split(".")[1])
-            if (!goodName) {
-                setError('The excel file could not be found !!!')
-                return
-            }
+            checkFile(file)
             const data = await file.arrayBuffer()
             const workbook = XLSX.readFile(data)
             const worksheet = workbook.Sheets[workbook.SheetNames[0]]
@@ -27,6 +29,7 @@ function App() {
             setError(e.message)
         }
     }
+
     return (
         <div className='App'>
             <input type="file" onChange={onChange}/>
